@@ -66,6 +66,11 @@ def pid(messages):
     d = messages[0].data[2:]
     return BitArray(d)
 
+# one byte 
+def byte(messages):
+    d = messages[0].data[2:]
+    v = d[0]
+    return v * Unit.percent
 
 # returns the raw strings from the ELM
 def raw_string(messages):
