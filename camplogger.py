@@ -31,7 +31,9 @@ commands = [
 def monitor():
     while True:
         try:
-            conn = obd.OBD(args.serial, start_low_power=False)
+            pauseFlg = mc.get('OBD_PAUSE')
+            if not pauseFlg:
+                conn = obd.OBD(args.serial, start_low_power=False)
         except KeyboardInterrupt:
             raise
         except:
@@ -39,6 +41,9 @@ def monitor():
             continue        
         
         while True:
+	    pauseFlg = mc.get('OBD_PAUSE')
+            if pauseFlg:
+                break
             cnt = 0
             for i in range(0, args.obdLim):
                 result =  conn.query(commands[i], force=True)
