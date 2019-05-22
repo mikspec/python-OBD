@@ -10,11 +10,11 @@ mc = memcache.Client(['127.0.0.1:11211'], debug=0)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--serial', default='/dev/rfcomm0', help='Path to the serial device to use')
-parser.add_argument('--debug', default=False, help='Debug flag')
-parser.add_argument('--errCnt', default=5, help='Limit of read errors before connection reset')
-parser.add_argument('--readDelay', default=1, help='Perid between read operations')
-parser.add_argument('--connDelay', default=10, help='Perid between connection status check')
-parser.add_argument('--obdLim', default=5, help='Limit of processed OBD commands')
+parser.add_argument('--debug', default=False, type=bool, help='Debug flag',)
+parser.add_argument('--errCnt', default=5, type=int, help='Limit of read errors before connection reset')
+parser.add_argument('--readDelay', default=1, type=int, help='Perid between read operations')
+parser.add_argument('--connDelay', default=10, type=int, help='Perid between connection status check')
+parser.add_argument('--obdLim', default=5, type=int, help='Limit of processed OBD commands')
 args = parser.parse_args()
 
 if args.debug: 
