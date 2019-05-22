@@ -41,7 +41,7 @@ def monitor():
             continue        
         
         while True:
-	    pauseFlg = mc.get('OBD_PAUSE')
+            pauseFlg = mc.get('OBD_PAUSE')
             if pauseFlg:
                 break
             cnt = 0
