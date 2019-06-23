@@ -54,7 +54,7 @@ __mode1__ = [
     OBDCommand("STATUS"                     , "Status since DTCs cleared"               , b"0101", 6, status,                ECU.ENGINE, True),
     OBDCommand("FREEZE_DTC"                 , "DTC that triggered the freeze frame"     , b"0102", 4, single_dtc,            ECU.ENGINE, True),
     OBDCommand("FUEL_STATUS"                , "Fuel System Status"                      , b"0103", 4, fuel_status,           ECU.ENGINE, True),
-    OBDCommand("ENGINE_LOAD"                , "Calculated Engine Load"                  , b"0104", 3, percent,               ECU.ENGINE, True),
+    OBDCommand("ENGINE_LOAD"                , "Calculated Engine Load"                  , b"0104", 3, byte,                  ECU.ENGINE, True),
     OBDCommand("COOLANT_TEMP"               , "Engine Coolant Temperature"              , b"0105", 3, temp,                  ECU.ENGINE, True),
     OBDCommand("SHORT_FUEL_TRIM_1"          , "Short Term Fuel Trim - Bank 1"           , b"0106", 3, percent_centered,      ECU.ENGINE, True),
     OBDCommand("LONG_FUEL_TRIM_1"           , "Long Term Fuel Trim - Bank 1"            , b"0107", 3, percent_centered,      ECU.ENGINE, True),

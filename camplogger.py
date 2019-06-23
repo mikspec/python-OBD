@@ -14,7 +14,7 @@ parser.add_argument('--debug', default=False, type=bool, help='Debug flag',)
 parser.add_argument('--errCnt', default=5, type=int, help='Limit of read errors before connection reset')
 parser.add_argument('--readDelay', default=1, type=int, help='Perid between read operations')
 parser.add_argument('--connDelay', default=10, type=int, help='Perid between connection status check')
-parser.add_argument('--obdLim', default=5, type=int, help='Limit of processed OBD commands')
+parser.add_argument('--obdLim', default=6, type=int, help='Limit of processed OBD commands')
 args = parser.parse_args()
 
 if args.debug: 
@@ -25,7 +25,8 @@ commands = [
     obd.commands.SPEED,
     obd.commands.COOLANT_TEMP,
     obd.commands.FUEL_LEVEL,
-    obd.commands.DISTANCE_SINCE_DTC_CLEAR
+    obd.commands.DISTANCE_SINCE_DTC_CLEAR,
+    obd.commands.ENGINE_LOAD
 ]
 
 def monitor():
@@ -38,7 +39,7 @@ def monitor():
             raise
         except:
             time.sleep(args.connDelay)
-            continue        
+            continue
         
         while True:
             pauseFlg = mc.get('OBD_PAUSE')
@@ -52,6 +53,7 @@ def monitor():
                 else:
                     cnt += 1 
             if cnt == args.obdLim:
+                print 'Break !!!!!!!!!!'
                 break
             mc.set('OBD_TIME', str(datetime.datetime.utcnow()))
             time.sleep(args.readDelay)
@@ -59,7 +61,7 @@ def monitor():
         time.sleep(args.connDelay)
 
 
-try: 
+try:
     monitor()
 except KeyboardInterrupt:
     print 'End of program'
