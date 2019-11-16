@@ -24,6 +24,7 @@ commands = [
     obd.commands.RPM,
     obd.commands.SPEED,
     obd.commands.ENGINE_LOAD,
+    obd.commands.FUEL_LEVEL,
     obd.commands.INTAKE_PRESSURE,
     obd.commands.FUEL_RATE,
 ]
@@ -32,7 +33,6 @@ commands_slow = [
     obd.commands.COOLANT_TEMP,
     obd.commands.OIL_TEMP,
     obd.commands.INTAKE_TEMP,
-    obd.commands.FUEL_LEVEL,
     obd.commands.DISTANCE_SINCE_DTC_CLEAR,
 ]
 
