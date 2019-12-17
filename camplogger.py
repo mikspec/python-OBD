@@ -34,6 +34,8 @@ commands_slow = [
     obd.commands.OIL_TEMP,
     obd.commands.INTAKE_TEMP,
     obd.commands.DISTANCE_SINCE_DTC_CLEAR,
+    obd.commands.COMMANDED_EGR,
+    obd.commands.CATALYST_TEMP_B1S2,
 ]
 
 def monitor():
@@ -48,14 +50,14 @@ def monitor():
             time.sleep(args.connDelay)
             continue
         
-	cnt_slow = 0
-	cnt_slow_len = len(commands_slow)
+        cnt_slow = 0
+        cnt_slow_len = len(commands_slow)
         while True:
             pauseFlg = mc.get('OBD_PAUSE')
             if pauseFlg:
                 break
             cnt_err = 0
-	    timestmp = datetime.datetime.now()
+            timestmp = datetime.datetime.now()
             for i in range(0, len(commands)):
                 result =  conn.query(commands[i], force=True)
                 if result is not None and result.value is not None:
@@ -67,11 +69,11 @@ def monitor():
             	mc.set(commands_slow[cnt_slow].name, result.value.m)
             else:
                 cnt_err += 1
-	    total = (datetime.datetime.now()-timestmp).total_seconds() 
+            total = (datetime.datetime.now()-timestmp).total_seconds() 
             if cnt_err >= args.errCnt:
                 print 'Break !!!!!!!!!!'
                 break
-	    cnt_slow = (cnt_slow + 1) % cnt_slow_len	
+	        cnt_slow = (cnt_slow + 1) % cnt_slow_len	
             mc.set('OBD_TIME', str(datetime.datetime.utcnow()))
             mc.set('OBD_RESP', total)
             time.sleep(args.readDelay-total if total < args.readDelay else 0)
