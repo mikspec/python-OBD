@@ -73,7 +73,7 @@ def monitor():
             if cnt_err >= args.errCnt:
                 print 'Break !!!!!!!!!!'
                 break
-	        cnt_slow = (cnt_slow + 1) % cnt_slow_len	
+            cnt_slow = (cnt_slow + 1) % cnt_slow_len	
             mc.set('OBD_TIME', str(datetime.datetime.utcnow()))
             mc.set('OBD_RESP', total)
             time.sleep(args.readDelay-total if total < args.readDelay else 0)
