@@ -66,15 +66,15 @@ def monitor():
                     cnt_err += 1
             result =  conn.query(commands_slow[cnt_slow], force=True)
             if result is not None and result.value is not None:
-            	mc.set(commands_slow[cnt_slow].name, result.value.m)
+                mc.set(commands_slow[cnt_slow].name, result.value.m)
             else:
                 cnt_err += 1
             total = (datetime.datetime.now()-timestmp).total_seconds() 
             if cnt_err >= args.errCnt:
-                print 'Break !!!!!!!!!!'
+                print('Break !!!!!!!!!!')
                 break
             cnt_slow = (cnt_slow + 1) % cnt_slow_len	
-            mc.set('OBD_TIME', unicode(datetime.datetime.utcnow()))
+            mc.set('OBD_TIME', str(datetime.datetime.utcnow()))
             mc.set('OBD_RESP', total)
             time.sleep(args.readDelay-total if total < args.readDelay else 0)
 
@@ -84,4 +84,4 @@ def monitor():
 try:
     monitor()
 except KeyboardInterrupt:
-    print 'End of program'
+    print('End of program')
