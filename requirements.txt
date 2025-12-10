@@ -1,0 +1,8 @@
+flexcache==0.3
+flexparser==0.4
+Pint==0.24.4
+platformdirs==4.5.1
+pyserial==3.5
+python-memcached==1.62
+python3-memcached-stats==0.2
+typing_extensions==4.15.0
